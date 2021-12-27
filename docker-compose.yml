@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: ./docker
+      dockerfile: nginx.dockerfile
+    ports:
+      - "88:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+      - php
+  mysql:
+    image: mariadb:10.5
+    ports:
+      - "3366:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+  php:
+    build:
+      context: ./docker
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+  composer:
+    build:
+      context: ./docker
+      dockerfile: composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+  npm:
+    image: node:current-alpine
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["npm"]
+    working_dir: /var/www/html
+  artisan:
+    build:
+      context: ./docker
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - mysql
+    entrypoint: ["php", "/var/www/html/artisan"]
+  assets:
+    image: node:current-alpine
+    volumes:
+      - ./src:/var/www/html
+    command: ["--user", "laravel", "/bin/sh", "-c", "npm install && npm run dev"]
+    working_dir: /var/www/html
+  dependencies:
+    build:
+      context: ./docker
+      dockerfile: composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    command: composer install --ignore-platform-reqs
+    depends_on:
+      - php
+    working_dir: /var/www/html
+  migrations:
+    build:
+      context: ./docker
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    command: ["php", "/var/www/html/artisan", "migrate:fresh", "--seed"]
+    depends_on:
+      - mysql
+    working_dir: /var/www/html
