@@ -1,33 +1,5 @@
 # Affiliates app
 
-- [Affiliates app](#affiliates-app)
-  - [Preface](#preface)
-  - [Installation](#installation)
-    - [Default way](#default-way)
-    - [Linux with Docker](#linux-with-docker)
-  - [Testing the application](#testing-the-application)
-    - [Using browser](#using-browser)
-    - [Using `CLI` command](#using-cli-command)
-    - [Running `Unit Tests`](#running-unit-tests)
-  - [Documentation](#documentation)
-  - [Available `make` commands list](#available-make-commands-list)
-  - [Touched files](#touched-files)
-    
-## Preface
-
-The main purposes of the application are:
-
-- Run a CLI command to identify affiliates within 100 Km from Dublin
-- UI to upload parse and filter affiliates from file -- one affiliate per line, JSON-encoded;
-- Calculate the spatial distance of each affiliate;
-- Filter affiliates by range (default 100 km);
-
-The application is making use the following `Laravel` features
-
-- [Artisan command](https://laravel.com/docs/8.x/artisan#writing-commands) to import parse and filter affiliates from CLI
-- [Model factories](https://laravel.com/docs/8.x/database-testing#defining-model-factories) to seed database during unit tests;
-- [Unit tests](https://laravel.com/docs/8.x/testing) to test core functionality and test http requests;
-- [Jetstream](https://jetstream.laravel.com/) a starter kit for SPA.
 
 ## Installation
 
@@ -37,13 +9,12 @@ First clone the repository to your local environment:
 
 ### Default way
 
-Requirements: (PHP 7.4, Composer)
+Requirements: (PHP 7.4, Composer, MySQL)
 
 Within your cloned project folder execute the following commands:
 
 1. Type `cd src`
-2. Type `cp .env.example .env`
-3. TYpe `touch database/database.sqlite`
+2. Type `cp .env.example .env` You may need to update your MySQL database credentials
 4. Type `composer install`
 5. Type `php artisan key:generate`
 6. Type `php artisan migrate --seed`
