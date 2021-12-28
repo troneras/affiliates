@@ -54,7 +54,7 @@ From the CLI command `affiliate:search` to filter affiliates within range of 100
 If you are running the application with docker:
 
 - `./app test` (same as `./app artisan test`) 
-- 
+ 
 If you are running the application without docker setup type:
 
 - `php artisan test` 
