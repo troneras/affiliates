@@ -14,8 +14,7 @@ First clone the repository to your local environment:
 This is the preferred way as will install, build, configure and migrate everything for you.
 Requirements: (**Docker** - **Docker Compose**)
 
-1. Type `chmod u+x app` to make the app script executable
-2. Type `./app init` to start the docker containers
+1. Type `./app init` to start the the app
 
 ### Default way
 If you can't use docker, this is still a standard laravel application with the only external requirement for a MySQL database.
