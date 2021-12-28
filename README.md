@@ -21,6 +21,8 @@ Requirements: (**Docker** - **Docker Compose**)
 2. Type `./app init` to start the the app
 3. You can access the app from `http://localhost:88`
 
+**tested on Ubuntu 20.04 both on Linux and Windows WSL2. 
+
 ### Default way
 If you can't use docker, this is still a standard laravel application with the only external requirement for a MySQL database.
 
