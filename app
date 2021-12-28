@@ -11,8 +11,8 @@ if [ $# -gt 0 ]; then
   if [ "$1" == "init" ]; then
     shift 1
     cp ./src/.env.example ./src/.env
-    docker-compose run --rm --user laravel artisan key:generate
     docker-compose up -d
+    docker-compose run --rm --user laravel artisan key:generate
 
   # Proxy PHP commands to the "php" binary on the application container...
   elif [ "$1" == "start" ]; then
