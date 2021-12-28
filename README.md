@@ -3,6 +3,9 @@ Demo Laravel application built with inertia and using docker-compose to spin up 
 The Affiliates app is able to filter affiliates by the distance to an office using the big circle equations.
 This laravel MVC project makes use of features like Migrations, Seeders, Unit tests, and artisan commands.
 
+![image](https://user-images.githubusercontent.com/1836450/147578188-9bfa4656-3279-4e31-9bd8-b8265ceb1fd5.png)
+
+
 ## Installation
 
 First clone the repository to your local environment:
