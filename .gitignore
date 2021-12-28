@@ -6,4 +6,4 @@
 docker-compose.override.yml
 /.idea
 /.vscode
-docker/mysql/*
+db_data

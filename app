@@ -10,12 +10,15 @@ fi
 if [ $# -gt 0 ]; then
   if [ "$1" == "init" ]; then
     shift 1
+    mkdir db_data
     cp ./src/.env.example ./src/.env
     docker-compose up -d
     docker-compose run --rm --user laravel composer install --ignore-platform-reqs
-    docker-compose run --rm --user node npm install
     docker-compose run --rm --user laravel artisan key:generate
     docker-compose run --rm --user laravel artisan migrate:fresh --seed
+    docker-compose run --rm npm install
+    docker-compose run --rm npm ci
+    docker-compose run --rm npm run dev
 
   # Proxy PHP commands to the "php" binary on the application container...
   elif [ "$1" == "start" ]; then
@@ -35,7 +38,13 @@ if [ $# -gt 0 ]; then
     shift 1
     docker-compose stop
     docker-compose up -d
-
+  elif [ "$1" == "clean" ];  then
+    shift 1
+    docker-compose stop
+    docker rm $(docker ps -aqf status=exited)
+  elif [ "$1" == "prune" ];  then
+    shift 1
+    docker system prune -a
     # Run artisan commands
   elif [ "$1" == "artisan" ]; then
     shift 1

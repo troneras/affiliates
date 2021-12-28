@@ -16,13 +16,14 @@ services:
     image: mariadb:10.5
     ports:
       - "3366:3306"
+    restart: always
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_USER: laravel
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - db_data:/var/lib/mysql
   php:
     build:
       context: ./docker
@@ -62,3 +63,5 @@ services:
       - ./src:/var/www/html
     command: ["/bin/sh", "-c", "npm ci && npm run dev"]
     working_dir: /var/www/html
+volumes:
+    db_data: {}
