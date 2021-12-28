@@ -12,7 +12,10 @@ if [ $# -gt 0 ]; then
     shift 1
     cp ./src/.env.example ./src/.env
     docker-compose up -d
+    docker-compose run --rm --user laravel composer install --ignore-platform-reqs
+    docker-compose run --rm --user node npm install
     docker-compose run --rm --user laravel artisan key:generate
+    docker-compose run --rm --user laravel artisan migrate:fresh --seed
 
   # Proxy PHP commands to the "php" binary on the application container...
   elif [ "$1" == "start" ]; then
