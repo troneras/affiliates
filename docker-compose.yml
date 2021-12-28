@@ -37,9 +37,8 @@ services:
       - ./src:/var/www/html
     working_dir: /var/www/html
   npm:
-    build:
-      context: ./docker
-      dockerfile: node.dockerfile
+    image: node:current-alpine
+    user: node
     volumes:
       - ./src:/var/www/html
     entrypoint: ["npm"]
@@ -55,17 +54,15 @@ services:
     working_dir: /var/www/html
     depends_on:
       - mysql
+      - php
     entrypoint: ["php", "/var/www/html/artisan"]
   assets:
-    build:
-      context: ./docker
-      dockerfile: node.dockerfile
+    image: node:current-alpine
+    user: node
     volumes:
       - ./src:/var/www/html
-    command: npm ci && npm run dev
+    command: ["/bin/sh", "-c", "npm install && npm run dev"]
     working_dir: /var/www/html
-    depends_on:
-      - php
   dependencies:
     build:
       context: ./docker
@@ -73,8 +70,6 @@ services:
     volumes:
       - ./src:/var/www/html
     command: composer install --ignore-platform-reqs
-    depends_on:
-      - php
     working_dir: /var/www/html
   migrations:
     build:
