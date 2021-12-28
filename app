@@ -10,7 +10,7 @@ fi
 if [ $# -gt 0 ]; then
   if [ "$1" == "init" ]; then
     shift 1
-    cp ./src/.env.example .env
+    cp ./src/.env.example ./src/.env
     docker-compose run --rm --user laravel artisan key:generate
     docker-compose up -d
 
