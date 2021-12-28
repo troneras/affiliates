@@ -54,7 +54,7 @@ services:
     working_dir: /var/www/html
     depends_on:
       - mysql
-      - php
+      - dependencies
     entrypoint: ["php", "/var/www/html/artisan"]
   assets:
     image: node:current-alpine
