@@ -53,6 +53,9 @@ if [ $# -gt 0 ]; then
   elif [ "$1" == "composer" ]; then
     shift 1
     docker-compose run --rm --user laravel composer "$@"
+  elif [ "$1" == "npm" ]; then
+    shift 1
+    docker-compose run --rm --user node npm "$@"  
   else
     echo "Available commands are 'init', 'start', 'stop', 'test' and 'restart' and any php, composer or artisan command " >&2
     exit 1
