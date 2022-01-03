@@ -43,6 +43,7 @@ Remember to refer to your project as [http://localhost:8000](http://localhost:80
 
 ## Testing the application
 The Affiliates can be imported and filtered by distance either from the  **browser**, navigating to [http://localhost:88](http://localhost:88)  or can be also run using the command line. 
+You can use the ``affiliates.txt` file from `testdata` folder to test.
 
 ### Using browser
 Access the address [http://localhost](http://localhost:8000) or [http://localhost:88](http://localhost:88) from your browser in accordin to your installation setup. 
